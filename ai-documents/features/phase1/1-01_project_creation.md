@@ -129,9 +129,102 @@
         *   Dynamically construct the markdown content for `TECH_STACK.md`.
         *   Use conditional logic to select appropriate libraries/tools based on user choices (e.g., if React is chosen, include Vite, Vitest, React Testing Library).
     *   **Sub-Task 6.2: Generate `AI_DIRECTIVES.md` Content:**
-        *   Based on `projectStore.techStack` choices, `projectStore.userExperienceLevel`, and **`projectStore.architecture` preferences**,
+        *   Based on `projectStore.techStack` choices, `projectStore.userExperienceLevel`, and `projectStore.architecture` preferences,
         *   Dynamically construct the markdown content for `AI_DIRECTIVES.md`.
         *   Adjust the level of detail or specific directives based on the user's experience level (e.g., more explicit instructions for beginners).
         *   Ensure language-specific rules (e.g., Java vs. TypeScript) are correctly applied based on backend framework choice.
-        *   **Incorporate directives for project structure, code style, API design, error handling, and testing philosophy based on user input.**
+        *   **Detailed Directives for Architectural & Design Preferences:**
+            *   **Project Structure Philosophy (`projectStore.architecture.projectStructure`):**
+                *   **"Feature-based" (Default/AI Recommended):**
+                    ```markdown
+                    ## 2. File & Directory Structure
+
+                    *   **Frontend:** Organize code by feature. Each major feature (e.g., `authentication`, `user_profile`, `plant_feed`) should have its own directory containing all related components, hooks, and utilities. Shared components should reside in a `src/shared` directory.
+                        *   Example: `src/features/authentication/components/LoginForm.tsx`, `src/features/plant_feed/pages/FeedPage.tsx`
+                    *   **Backend:** Organize code by domain or feature. Use packages/folders to group related controllers, services, and repositories.
+                        *   Example (Java/Spring Boot): `com.vibespecai.project.controller`, `com.vibespecai.project.service`, `com.vibespecai.project.repository`
+                    ```
+                *   **"Layer-based":**
+                    ```markdown
+                    ## 2. File & Directory Structure
+
+                    *   **Frontend:** Organize code by technical layer. Separate directories for `components`, `pages`, `hooks`, `utils`, `services`, etc.
+                        *   Example: `src/components/buttons/PrimaryButton.tsx`, `src/pages/HomePage.tsx`
+                    *   **Backend:** Organize code by technical layer. Separate packages/folders for `controllers`, `services`, `repositories`, `models`, etc.
+                        *   Example (Java/Spring Boot): `com.vibespecai.controller`, `com.vibespecai.service`, `com.vibespecai.repository`
+                    ```
+            *   **Code Style Strictness (`projectStore.architecture.codeStyleStrictness`):**
+                *   **"Very Strict" (Default/AI Recommended):**
+                    ```markdown
+                    ## 3. Coding Style
+
+                    *   **Formatting:** Adhere strictly to the configuration in the project's `.prettierrc` (frontend) and Google Java Format (backend) or equivalent auto-formatter. Automated formatting on commit is mandatory.
+                    *   **Linting:** Adhere strictly to the rules in the project's `.eslintrc.js` (frontend) and Checkstyle/PMD/SpotBugs (backend) configurations. All new code must have zero linting errors or warnings. CI/CD pipelines will enforce this.
+                    *   **Comments:** Add JSDoc (frontend) or Javadoc (backend) comments to all public methods, complex logic blocks, and API endpoints, explaining the *why*, not the *what*.
+                    ```
+                *   **"Moderate":**
+                    ```markdown
+                    ## 3. Coding Style
+
+                    *   **Formatting:** Use a consistent auto-formatter (e.g., Prettier, Google Java Format). Formatting issues should be addressed during code review.
+                    *   **Linting:** Follow linting rules as configured. Warnings should be reviewed and addressed, but may not block merges for minor issues.
+                    *   **Comments:** Add comments for complex logic or non-obvious code sections.
+                    ```
+                *   **"Flexible":**
+                    ```markdown
+                    ## 3. Coding Style
+
+                    *   **Formatting:** Basic formatting consistency is expected. Use of an auto-formatter is recommended but not strictly enforced.
+                    *   **Linting:** Linting is enabled for basic error detection. Warnings are informational.
+                    *   **Comments:** Add comments where necessary for clarity.
+                    ```
+            *   **API Design Philosophy (`projectStore.architecture.apiDesign`):**
+                *   **"RESTful" (Default/AI Recommended):**
+                    ```markdown
+                    ## 4. API & Data
+
+                    *   **API Design:** Adhere strictly to RESTful principles. Endpoints should be resource-oriented (e.g., `/api/v1/users`, `/api/v1/projects`). Use standard HTTP methods (GET, POST, PUT, DELETE) appropriately. Implement clear versioning (e.g., `/v1/`).
+                    *   **Error Handling:** All API endpoints must have robust, centralized error handling and return standardized JSON error responses with appropriate HTTP status codes (e.g., 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Internal Server Error).
+                    ```
+                *   **"GraphQL":**
+                    ```markdown
+                    ## 4. API & Data
+
+                    *   **API Design:** Implement a GraphQL API. Define a clear schema (`schema.graphql`) that specifies types, queries, mutations, and subscriptions. Use a single endpoint (e.g., `/graphql`).
+                    *   **Error Handling:** Handle errors within the GraphQL response structure, providing clear error messages and codes.
+                    ```
+            *   **Error Handling Approach (`projectStore.architecture.errorHandling`):**
+                *   **Default/AI Recommended (Centralized & Detailed):**
+                    ```markdown
+                    ## 4. API & Data (continued)
+
+                    *   **Error Handling:** Implement a centralized error handling mechanism (e.g., global exception handlers in Spring Boot, middleware in Express, React Error Boundaries). Error responses should be standardized JSON objects containing a clear message, a unique error code, and optionally, details for debugging (in development environments only). Sensitive information must never be exposed in error messages.
+                    *   **Logging:** Implement comprehensive logging for errors and critical events. Use a structured logging format.
+                    ```
+                *   **User-defined (Free-form text):** The user's input will be directly incorporated here, potentially with AI refinement for clarity.
+            *   **Testing Philosophy (`projectStore.architecture.testingPhilosophy`):**
+                *   **"Comprehensive" (Default/AI Recommended):**
+                    ```markdown
+                    ## 5. Testing Strategy
+
+                    *   **Mandatory Testing:** All new features and bug fixes must be accompanied by comprehensive tests.
+                    *   **Unit Tests:** Implement thorough unit tests for all business logic, utility functions, and individual components/classes. Aim for high code coverage.
+                    *   **Integration Tests:** Implement integration tests to verify the interaction between different modules, services, and the database. For APIs, ensure end-to-end flow testing.
+                    *   **Component/UI Tests:** For the frontend, use React Testing Library (or equivalent) to test component rendering, user interactions, and state changes.
+                    *   **Test-Driven Development (TDD):** While not strictly enforced, TDD is highly encouraged for new feature development.
+                    ```
+                *   **"TDD":**
+                    ```markdown
+                    ## 5. Testing Strategy
+
+                    *   **Test-Driven Development (TDD):** All new features must be developed using a strict TDD approach: write a failing test, write the minimum code to pass the test, then refactor.
+                    *   **Comprehensive Tests:** Ensure high unit and integration test coverage as a result of the TDD process.
+                    ```
+                *   **"Basic":**
+                    ```markdown
+                    ## 5. Testing Strategy
+
+                    *   **Basic Tests:** Implement essential unit tests for critical business logic and core functionalities. Integration tests are optional but recommended for complex flows.
+                    *   **Smoke Tests:** Ensure basic application functionality works after deployments.
+                    ```
     *   For MVP, this will simulate saving these files to a local client-side storage (e.g., `localStorage` or an in-memory object) before the GitHub integration step. This is a placeholder for actual file system interaction.
