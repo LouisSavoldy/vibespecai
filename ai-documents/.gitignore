@@ -1,0 +1,5 @@
+# Ignore sensitive files and build artifacts
+.env
+node_modules/
+dist/
+.DS_Store
