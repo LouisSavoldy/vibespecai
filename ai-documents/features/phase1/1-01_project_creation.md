@@ -4,6 +4,7 @@
 
 **Related Wireframes:**
 *   `/spec/wireframe.md` (Sections 2 & 3)
+*   `/ai-documents/PRD.md`
 
 ---
 

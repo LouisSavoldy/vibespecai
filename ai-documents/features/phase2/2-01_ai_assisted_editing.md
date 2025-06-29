@@ -4,6 +4,7 @@
 
 **Related Wireframes:**
 *   `/spec/wireframe.md` (Section 7: Editing an Existing Artifact)
+*   `/ai-documents/PRD.md`
 
 ---
 

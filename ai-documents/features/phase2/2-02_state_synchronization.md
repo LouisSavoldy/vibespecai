@@ -4,6 +4,7 @@
 
 **Related Wireframes:**
 *   `/spec/wireframe.md` (Section 6: The Living Workspace - *specifically the "Sync with GitHub" action*)
+*   `/ai-documents/PRD.md`
 
 ---
 

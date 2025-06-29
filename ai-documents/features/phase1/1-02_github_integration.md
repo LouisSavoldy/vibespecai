@@ -4,6 +4,7 @@
 
 **Related Wireframes:**
 *   `/spec/wireframe.md` (Section 4: The Handoff Instructions - *These wireframes serve as visual guides for the UI implementation tasks below.*)
+*   `/ai-documents/PRD.md`
 
 ---
 
