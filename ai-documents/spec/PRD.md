@@ -1,171 +1,61 @@
-# Product Requirements Document: VibeSpecAI (Version 1.1)
+### **Product Requirements Document: VibeSpecAI**
+**Version:** 1.0
+**Status:** Draft
 
-**Version:** 1.1
-**Status:** Ready for Development
+**1. Introduction & Overview**
+VibeSpecAI is a guided product development tool designed to bridge the gap between a high-level idea and a developer-ready plan. It addresses the "blank page" problem for creative founders, designers, and junior developers by providing a structured, conversational process to build a robust Product Requirements Document (PRD). This empowers "Aspiring Builders" to create architecturally sound applications and gives AI coding assistants the necessary context to generate high-quality, consistent code.
 
-## 1. Vision & Mission
+**2. Goals**
+*   Solve the core problem of translating a product "vibe" into an actionable, well-structured PRD for the "Aspiring Builder."
+*   Validate the core product hypothesis by successfully launching a Minimum Viable Product (MVP) that users find valuable.
+*   Achieve the following success metrics: High user engagement and successful generation of PRDs.
 
-**Vision:** To empower the next generation of creators, thinkers, and "VIBE coders" to transform their ideas into working software without the traditional barriers of software engineering complexity.
+**3. User Persona**
+The primary user for this product is the **"Aspiring Builder."** This persona represents a blend of non-technical founders, designers, and junior developers. They are creative and have strong product vision but may lack the deep technical or architectural experience to create a solid technical plan from scratch. They are united by the challenge of bridging the gap between a great idea and a well-executed project.
 
-**Mission:** VibeSpecAI is an AI-driven SaaS tool that acts as an intelligent project architect. It partners with entry-level developers to translate their abstract vision into a complete set of structured, high-quality specifications and instructions, ready for execution by modern AI IDEs.
+**4. User Stories (MVP)**
+*   **Onboarding:** "As an Aspiring Builder, I want to sign in with my GitHub account so that I can securely access the application and prepare to save my project artifacts."
+*   **Core Journey:** "As an Aspiring Builder, I want to create a new project and be guided through a series of questions about my idea, so that the system can automatically generate a structured Product Requirements Document for me."
+*   **Refinement:** "As an Aspiring Builder, I want to review and edit the generated PRD in a simple editor, so that I can refine the details to perfectly match my vision."
+*   **The Payoff:** "As an Aspiring Builder, I want to save my final PRD, which automatically creates a new repository in my GitHub account and places the document within an `ai-artifacts` folder, so that my project has a professional and organized starting point."
 
-## 2. The Problem Statement
+**5. MVP: Functional Requirements**
+The following features have been identified as essential for the Minimum Viable Product. These features directly support the critical path user journey.
 
-The rise of powerful AI IDEs has not solved the foundational problem of what code to write. VibeSpecAI solves this by addressing challenges for both the developer and their AI assistant:
+*   **Critical Path User Journey:**
+    1.  User signs in with GitHub.
+    2.  User creates a new project and gives it a name.
+    3.  User is guided through a structured dialogue about their product idea.
+    4.  The system generates a PRD based on their answers.
+    5.  User reviews and edits the PRD in an on-screen editor.
+    6.  User saves the final PRD, which creates a new GitHub repo and saves the `PRD.md` file within an `ai-artifacts/` folder.
 
-**For the VIBE Coder:**
+*   **MVP Feature List:**
+    *   **User Onboarding:** Integration with GitHub for user sign-in.
+    *   **Project Creation:** Ability to start and name a new project.
+    *   **AI-Guided Dialogue:** A conversational interface that asks structured questions to gather product requirements.
+    *   **Markdown Editor:** An on-screen editor to review and modify the AI-generated PRD.
+    *   **GitHub Repo Creation:** The system must be able to create a new public repository in the user's authenticated GitHub account.
+    *   **File Scaffolding:** On save, the system will create an `ai-artifacts` folder and save the document as `PRD.md` inside it.
 
-*   **The "Blank Page" Problem:** Translating a "vibe" into an actionable plan.
-*   **Architectural Fragility:** Building an MVP that requires major, demotivating refactoring for V2.
-*   **Integration & Deployment Anxiety:** Fear of complex third-party services and the "go-live" process.
-*   **Local Environment Hell:** Getting stuck on installation and setup before even starting the project.
+**6. Non-Goals (Out of Scope for MVP)**
+To ensure focus and rapid delivery, the following features and functionalities are explicitly out of scope for the initial MVP. They will be considered for future versions based on user feedback.
+*   User subscriptions and payments.
+*   Connecting to or using an existing GitHub repository.
+*   AI-guided selection of languages, frameworks, or technical specifications.
+*   Generating instructions or detailed tasks for an AI coding agent.
+*   Analyzing an existing codebase to add new features.
+*   Saving drafts to local storage before syncing to GitHub.
+*   A three-panel user interface (will be simplified for MVP).
 
-**For the AI IDE:**
+**7. Design & Technical Considerations**
+*   **UI Flow:** The MVP will use a two-phase interface: a sequential "Dialogue Phase" followed by a full-screen "Editor Phase."
+*   **File Structure:** All generated artifacts for the MVP and future versions will be stored within an `ai-artifacts` folder in the user's repository.
 
-*   **Lack of Context:** Receiving one-off prompts without understanding the project's overall goals or rules.
-*   **Inconsistent Instructions:** Generating code that lacks a unified style or architectural pattern.
+**8. Success Metrics (Initial)**
+*   **Activation Rate:** Percentage of users who sign in and successfully generate at least one PRD.
+*   **Feature Adoption:** Number of PRDs successfully saved to GitHub.
+*   **User Retention (Qualitative):** Gathering feedback on whether users would use the tool again for their next project.
 
-## 3. Target Audience & Personas
-
-### 3.1. Primary Persona: "Alex, the VIBE Coder"
-
-*   **Who is Alex?** A creative, motivated individual who is technically curious but not formally trained in software engineering.
-*   **Goals:** Wants to build a web app for a side project or startup MVP and is excited by the potential of AI coding tools.
-*   **Pain Points:** Gets overwhelmed by technical jargon, architectural decisions, and the setup process.
-
-### 3.2. Non-Goals & Negative Persona: "Sam, the Senior Engineer"
-
-*   **Who is Sam?** A professional software engineer with 10+ years of experience, comfortable with complex command-line tools and bespoke architectures.
-*   **Why is VibeSpecAI not for Sam?** Sam would find the tool's guided, opinionated nature restrictive. VibeSpecAI prioritizes simplicity and best-practice defaults over the infinite, fine-grained customizability that a senior engineer requires.
-
-## 4. Core Product Principles
-
-*   **Socratic Dialogue, Not Interrogation:** A patient, guiding partner that explores the user's idea.
-*   **Architect for Today, Plan for Tomorrow:** Ruthlessly prioritize the MVP while strategically laying a foundation for future features.
-*   **Git as the Single Source of Truth:** VibeSpecAI is the "brain," but Git is the "book."
-*   **Human-in-the-Loop:** Automate the tedious, but orchestrate the essential human decisions.
-*   **Opinionated by Default, Flexible by Choice:** Recommend best-in-class solutions but allow overrides for knowledgeable users.
-*   **Frictionless Onboarding & Progressive Disclosure:** The user experience must be simple at the start. Complexity is only introduced when needed for a specific task to build momentum and confidence.
-
-## 5. Business Model & Monetization
-
-*   **Freemium Tier:** Users can create one full project for free. This includes all core features, from conception to deployment instructions, allowing them to experience the full value of VibeSpecAI without initial investment. This serves as our primary marketing and user acquisition tool.
-*   **Pro Tier (Subscription):** A monthly/annual subscription will unlock:
-    *   Unlimited projects.
-    *   Access to advanced and specialized Integration Modules.
-    *   Priority support.
-*   **Tutorial Project:** Upon first login, users will be offered a guided "Tutorial Project" (e.g., a "Link-in-Bio App"). This will walk them through each key VibeSpecAI feature, teaching the core workflow in a safe, controlled environment.
-
-## 6. MVP Definition & Phased Rollout
-
-To ensure we build a robust and scalable application, we will release features in phases. The architecture of each phase must anticipate the needs of the next.
-
-### Phase 1: The Minimum Viable Product (MVP)
-
-The goal of the MVP is to validate the core hypothesis: that users will find value in a guided process that transforms an idea into a GitHub repository containing a structured project blueprint. This phase focuses solely on the generation and delivery of the project blueprint, assuming the user's development environment is already prepared.
-
-**MVP Features:**
-
-1.  **Core Project Creation:** The Socratic interview flow that generates the `PRD.md`, `TECH_STACK.md`, `AI_DIRECTIVES.md`, `schema.sql`, and `schema-er-diagram.md` files. (See `ai-documents/features/phase1/1-01_project_creation.md`)
-2.  **GitHub Integration:** The ability to connect a GitHub account, create a new repository, and push the generated blueprint files, including the database schema files. (See `ai-documents/features/phase1/1-02_github_integration.md`)
-
-*Wireframes (`/spec/wireframe.md`) serve as visual specifications for the UI components of this MVP phase.*
-
-*Architectural Consideration:* The system must be designed to be stateless for the MVP, but with clear extension points for user-specific data in Phase 2.
-
-### Phase 2: Core Product Expansion (Post-MVP)
-
-The goal of this phase is to perfect the core single-player experience, making the blueprint a living, editable document. This phase will also see the Socratic AI chat transition from a simulated frontend experience to being powered by a real AI backend agent (e.g., Gemini 2.5), enabling more dynamic and intelligent interactions.
-
-**Planned Features:**
-
-1.  **AI-Assisted Editing:** The ability for a user to select any generated artifact (like the PRD or a feature file) and use a conversational AI chat to modify it. (See `project1/features/phase2/2-01_ai_assisted_editing.md`)
-2.  **State Synchronization:** The ability for VibeSpecAI to periodically sync with the user's Git repo to detect changes and help resolve conflicts, ensuring the blueprint remains the source of truth. (See `project1/features/phase2/2-02_state_synchronization.md`)
-
-*Architectural Consideration:* The backend will need a robust system for parsing, modifying, and re-serializing the markdown/YAML artifacts. The system must also be prepared to handle user-specific data.
-
-### Phase 3: Monetization & User Management
-
-The goal of this phase is to build a sustainable business around the validated core product.
-
-**Planned Features:**
-
-1.  **User Authentication:** Full sign-up, login, and user account management. The architecture from the previous phases should anticipate the need to associate projects and GitHub tokens with specific users.
-2.  **Stripe Integration:** The ability for users to subscribe to a Pro Tier.
-
-*Architectural Consideration:* The backend must be designed with a modular plugin system to easily add new third-party integrations.
-
-### Phase 4: Future Vision: Collaboration
-
-The goal of this phase is to expand VibeSpecAI from a single-player tool to a collaborative platform for teams.
-
-**Planned Features:**
-
-1.  **Team-Based Projects:** Allow multiple users to be members of a project with different permission levels (e.g., Admin, Editor, Viewer).
-2.  **Real-Time Collaborative Editing:** Allow multiple users to edit the PRD and other artifacts simultaneously, seeing each other's cursors and changes in real-time.
-3.  **Commenting and Discussion:** Add the ability for team members to leave comments and have discussions on specific parts of the project blueprint.
-
-## 7. The User Journey: A Narrative Flow
-
-*   **Phase 0: Environment Pre-flight Check (NEW)**
-    *   Before project setup, VibeSpecAI provides a "Pre-flight Check." This is a diagnostic script or a manual checklist to verify that essential tools (Git, Node.js, npm/yarn) are installed on the user's machine. It links to simple installation guides to prevent early-stage frustration.
-*   **Phase 1: The Spark (Project Conception)**
-    *   Alex signs up and initiates the Socratic interview to define their "vibe," target audience, and core problem.
-    *   The interactive "MVP Identifier" helps Alex separate core features from future goals.
-    *   VibeSpecAI generates an interactive PRD. Alex can click any section to trigger a focused dialogue to refine that part.
-*   **Phase 2: The Blueprint (Technical & Architectural Design)**
-    *   VibeSpecAI guides Alex through selecting a Tech Stack, including a testing framework (e.g., Jest/Vitest).
-    *   The "Future-Proofing Dialogue" suggests schema and component designs based on future feature goals.
-    *   Artifacts are generated: PRD.md, TECH_STACK.md, `AI_DIRECTIVES.md` (now including testing rules), feature tasks, and a `.gitignore` file that automatically includes `.env`.
-*   **Phase 3: The Handoff (Sync to GitHub & Begin Build)**
-    *   Alex connects their GitHub account. VibeSpecAI pushes the complete project blueprint to the repository.
-    *   The "IDE-Specific Onboarding" screen provides a personalized, step-by-step guide for cloning the repo and feeding the first instruction file to their chosen AI IDE (Cursor, VS Code, etc.).
-*   **Phase 4: The Evolution (Iteration & Debugging)**
-    *   Alex uses the context-aware "Add/Edit Feature" workflows to evolve the application.
-    *   When a bug occurs, Alex uses the "AI Debugging Co-Pilot," which uses read-only GitHub access to analyze the relevant code and generate a highly specific, context-rich debugging prompt.
-*   **Phase 5: The Launch (Deployment & Beyond)**
-    *   The "Deployment Module" generates a human-readable guide for deploying the frontend (e.g., Vercel) and backend (e.g., Render), including instructions for setting up environment variables and automated database backups.
-
-## 7. Detailed Feature Breakdown & Onboarding
-
-### 7.1. Project Dashboard & User Account Management
-
-*   A central hub to view and manage all projects.
-*   Displays project health, a feed of the "Project Decision Log," and quick links to core actions.
-*   Includes a "Billing" section for managing subscriptions via a Stripe customer portal.
-*   Project deletion within VibeSpecAI will never delete the user's GitHub repository.
-
-### 7.2. Core Specification Engine
-
-*   **Socratic AI:** A conversational engine to tease out product requirements.
-*   **Interactive PRD Editor:** A UI where each PRD section can be individually edited via a new conversational prompt.
-*   **Feature Task Generator:** Decomposes requirements into granular tasks, including tasks for writing corresponding unit and integration tests.
-
-### 7.3. Architectural Intelligence
-
-*   **Tech Stack Selector:** A dual-path workflow for AI-guided recommendations or user-specified stacks.
-*   **AI Directives (`AI_DIRECTIVES.md`):** The project's "constitution," defining rules for code style, libraries, and now, a mandatory testing strategy.
-*   **Project Decision Log:** Automatically generated records of key architectural decisions.
-*   **State Synchronization:** VibeSpecAI is designed to periodically sync with the user's Git repo to detect changes and prompt the user to resolve conflicts, ensuring the tool remains the source of truth.
-
-### 7.4. Lifecycle & Support Tools
-
-*   **IDE-Specific Onboarding:** Tailored guides for getting started in major AI IDEs.
-*   **Enhanced AI Debugging Co-Pilot:** Uses read-only GitHub App permissions to analyze the user's actual code, generating superior debugging prompts.
-
-### 7.5. Integration Modules
-
-*   A framework for adding complex services. Each module includes an interview, code tasks, and a human-readable setup guide.
-*   **Authentication:** Guides setup of social sign-on (Login with Google) via providers like Clerk, Auth0, or Supabase Auth.
-*   **Subscriptions:** Stripe integration.
-*   **Deployment:** Vercel, Render, etc., including instructions for database backups.
-*   **Data Management:** Generates database seeding scripts (`prisma/seed.ts`) to populate the new application with initial data.
-*   **File/Image Storage:** Cloudinary or AWS S3.
-*   **Analytics & Email:** Plausible, SendGrid, etc.
-
-## 8. Security, Permissions & Data Handling
-
-*   **Principle of Least Privilege:** VibeSpecAI requests the minimum required GitHub scopes for its functionality (read/write access to repo files, user identity).
-*   **Proactive Secret Protection:** The system automatically generates a `.gitignore` file to exclude `.env`. The UI and instructions will contain explicit, bold warnings against committing secret keys.
-*   **Credential Security:** All sensitive credentials (user OAuth tokens, internal API keys) are encrypted at rest on our servers using industry-standard solutions (e.g., AWS KMS).
-*   **User Data & IP:** A clear privacy policy will state that a user's project ideas and code are their own intellectual property and will not be used for model training without explicit, opt-in consent.
+**9. Open Questions**
+*   (None at this time. All initial questions resolved.)
