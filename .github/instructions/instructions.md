@@ -5,6 +5,7 @@ This is the "Constitution" for the VibeSpecAI project. The AI IDE must follow th
 ## 1. General Principles
 
 *   **Adhere to the `TECH_STACK.md`:** Do not introduce new libraries or technologies without them being added to the official tech stack.
+*   **Adhere to the 'instruction
 *   **Language Mismatch:** The frontend is TypeScript, the backend is Java. Maintain strict typing and best practices for each language.
 *   **Dry Principle (Don't Repeat Yourself):** Create reusable functions, components, and services wherever possible.
 *   **Separation of Concerns:** Keep UI, business logic, and data access layers distinct.

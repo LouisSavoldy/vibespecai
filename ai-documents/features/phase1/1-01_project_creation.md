@@ -24,6 +24,8 @@
     *   **Center Pane:** This will be the main content area. Initially, it should show the "What's the vibe?" input field.
     *   **Right Pane:** This will house the AI Chat Agent component.
 
+    The panels should start off with the first panel locked width, and the right pane should be wide enough for the chat window and the  second panel should take up the middle remaining width (most of the width).
+
 ### Task 3: Implement the "Vibe" Input
 
 *   **File:** `src/features/project_creation/components/VibeInput.tsx`
@@ -229,3 +231,5 @@
                     *   **Smoke Tests:** Ensure basic application functionality works after deployments.
                     ```
     *   For MVP, this will simulate saving these files to a local client-side storage (e.g., `localStorage` or an in-memory object) before the GitHub integration step. This is a placeholder for actual file system interaction.
+
+    *   Files should be displayed under the steps in file tree format for the user to drill into and select. Copy the format of the vs code explorer. 
